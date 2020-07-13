@@ -2,7 +2,10 @@ package com.example.coolweather;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
+import org.litepal.LitePal;
 
 public class MainActivity extends AppCompatActivity {
 

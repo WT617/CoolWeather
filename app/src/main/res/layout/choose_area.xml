@@ -28,13 +28,6 @@
             android:background="@drawable/back"/>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/show_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:text="在这里展示收到的数据"/>
-
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"

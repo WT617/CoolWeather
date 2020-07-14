@@ -50,8 +50,6 @@ public class ChooseAreaFragment extends Fragment {
 
     private TextView titleText;
 
-    private TextView showData;
-
     private Button backButton;
 
     private ListView listView;
@@ -95,7 +93,6 @@ public class ChooseAreaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area, container, false);
         titleText = (TextView) view.findViewById(R.id.title_text);
-        showData = (TextView) view.findViewById(R.id.show_data);
         backButton = (Button) view.findViewById(R.id.back_button);
         listView = (ListView) view.findViewById(R.id.list_view);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
@@ -204,12 +201,11 @@ public class ChooseAreaFragment extends Fragment {
      * 根据传入的地址和类型从服务器上查询省市县数据。
      */
     private void queryFromServer(final String address, final String type) {
-        showProgressDialog();
+        //showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
-                showData.setText("responseText" + responseText);
                 boolean result = false;
                 if ("province".equals(type)) {
                     result = Utility.handleProvinceResponse(responseText);
@@ -222,7 +218,7 @@ public class ChooseAreaFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            closeProgressDialog();
+                            //closeProgressDialog();
                             if ("province".equals(type)) {
                                 queryProvinces();
                             } else if ("city".equals(type)) {
@@ -238,11 +234,10 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onFailure(Call call, IOException e) {
                 // 通过runOnUiThread()方法回到主线程处理逻辑
-                showData.setText("从网上读取数据失败，网址："+ address);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        closeProgressDialog();
+                        //closeProgressDialog();
                         Toast.makeText(getContext(), "加载失败", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -253,22 +248,22 @@ public class ChooseAreaFragment extends Fragment {
     /**
      * 显示进度对话框
      */
-    private void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("正在加载...");
-            progressDialog.setCanceledOnTouchOutside(false);
-        }
-        progressDialog.show();
-    }
+//    private void showProgressDialog() {
+//        if (progressDialog == null) {
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("正在加载...");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//        }
+//        progressDialog.show();
+//    }
 
     /**
      * 关闭进度对话框
      */
-    private void closeProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
-    }
+//    private void closeProgressDialog() {
+//        if (progressDialog != null) {
+//            progressDialog.dismiss();
+//        }
+//    }
 
 }
